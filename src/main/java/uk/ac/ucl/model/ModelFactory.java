@@ -8,7 +8,7 @@ public class ModelFactory {
     public static Model getModel() throws IOException {
         if (model == null){
             model = new Model();
-            model.readFile(new File("./data/patients.csv"));
+            model.readFile(new File("./data/notes"));
         }
         return model;
     }
