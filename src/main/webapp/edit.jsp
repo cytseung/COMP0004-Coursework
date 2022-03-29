@@ -1,13 +1,16 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="uk.ac.ucl.model.Note" %>
+<%@ page import="java.net.URL" %>
 <%@ page import="java.time.LocalDateTime" %>
-<%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.Base64" %>
-<%@ page import="java.util.HashMap" %>
-<%@ page import="java.net.URL" %>
+<%@ page import="java.time.format.DateTimeFormatter" %><%--
+  Created by IntelliJ IDEA.
+  User: admin
+  Date: 29/3/2022
+  Time: 1:56 PM
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <html>
 <head>
     <title>Notes</title>
@@ -26,8 +29,6 @@
         URL url = null;
 
         LocalDateTime createdAt = note.getCreatedAt();
-//        System.out.println(note);
-//        System.out.println(note.getContent());
         note.getContent();
         Map<String, Object> content = (Map<String, Object>) note.getContent();
         for (Map.Entry entry : content.entrySet()) {
@@ -42,7 +43,7 @@
                     imgbytes[i++] = b.byteValue();
                 }
                 imgStr = Base64.getEncoder().encodeToString(imgbytes);
-            }else if (entry.getKey() == "url"){
+            } else if (entry.getKey() == "url") {
                 url = (URL) entry.getValue();
             }
         }
@@ -53,28 +54,42 @@
         }
 
 %>
-<p>id: <%=id%>
-</p>
+<form action="<%=id%>" method="post" enctype='multipart/form-data'>
+    <input type="hidden" id="id" name="id" value="<%=id%>">
+    <p>
+        <label for="title">Title:</label>
+        <input id="title" name="title" type="text" value="<%=title%>"/>
+    </p>
+    <p>
+        <label for="label">Label:</label>
+        <input id="label" name="label" type="label" value="<%=label%>"/>
+    </p>
+    <p>
+        <label for="text">Text:</label>
+        <input id="text" name="text" type="text" value="<%=text%>"/>
+    </p>
+    <p>
+        <label for="image">Image:</label>
+        <%if (image != null) {%>
+        <%--<p>image: <%=imgStr%>--%>
+        <img alt="img" src="data:image/jpeg;base64, <%=imgStr%>"/>
+        <%}%>
+        <input id="image" name="image" type="file"/>
 
-<p>title: <%=title%>
-</p>
-<p>label: <%=label%>
-</p>
-<% if (text != "") {%>
-<p>text: <%=text%>
-</p>
-<%}%>
-<%if (image != null) {%>
-<%--<p>image: <%=imgStr%>--%>
-<img alt="img" src="data:image/jpeg;base64, <%=imgStr%>"/>
-</p>
-<%}%>
-<% if (url != null) {%>
-<p>Url: <%=url%>
-</p>
-<%}%>
-<p>created: <%=formatCreatedAt%>
-</p>
+    </p>
+    <p>
+        <label for="url">Url:</label>
+        <% if (url != null) {%>
+
+        <input id="url" name="url" type="url" value="<%=url%>"/>
+
+        <%} else {%>
+        <input id="url" name="url" type="url" value=""/>
+        <%}%>
+    </p>
+    <input type="submit"/>
+</form>
+</form>
 <%}%>
 </body>
 </html>

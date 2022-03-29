@@ -20,18 +20,21 @@ public class Model {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
+
 
     public List<Note> getNotes() {
         return notes;
     }
 
+
     public void setNotes(List<Note> notes) {
         this.notes = notes;
     }
 
-    public Optional<Note> getNote(int id) {
-        return notes.stream().filter(note -> note.getId() == id).findFirst();
+    public Note getNote(String id) {
+        return notes.stream().filter(note -> note.getId().equals(id)).findFirst().orElse(null);
     }
 
     public void readFile(File file) throws IOException {

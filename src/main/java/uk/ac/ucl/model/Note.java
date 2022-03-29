@@ -6,9 +6,9 @@ import java.util.Map;
 
 public interface Note<T> extends Serializable {
 
-    int getId();
+    String getId();
 
-    void setId(int id);
+    void setId(String id);
 
     String getTitle();
 

@@ -14,25 +14,40 @@ import javax.servlet.http.Part;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 @MultipartConfig
-@WebServlet(name = "create", urlPatterns = {"/create/*"})
-public class CreateServlet extends HttpServlet {
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        ServletContext context = getServletContext();
-        RequestDispatcher dispatch = context.getRequestDispatcher("/create.jsp");
-        dispatch.forward(request, response);
-    }
-
+@WebServlet(name = "edit", urlPatterns = {"/edit/*"})
+public class UpdateServlet extends HttpServlet {
     private static Byte[] toObject(byte[] bytesPrims) {
         Byte[] bytesObjects = new Byte[bytesPrims.length];
         Arrays.setAll(bytesObjects, n -> bytesPrims[n]);
         return bytesObjects;
     }
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String param = request.getPathInfo();
+        String id = param.substring(1);
+        System.out.println(id);
+        Model model = ModelFactory.getModel();
+        List<Note> notes = model.getNotes();
+        if (notes != null) {
+//            Note note = notes.stream().filter(n -> (n.getId() == id)).findFirst().orElse(null);
+            Note note = model.getNote(id);
+            System.out.println(note.getClass());
+            request.setAttribute("note", note);
+        }
+        ServletContext context = getServletContext();
+        RequestDispatcher dispatch = context.getRequestDispatcher("/edit.jsp");
+        dispatch.forward(request, response);
+    }
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
+        String id = request.getParameter("id");
+        System.out.println(id);
         String title = request.getParameter("title");
         String label = request.getParameter("label");
         String text = request.getParameter("text");
@@ -41,6 +56,7 @@ public class CreateServlet extends HttpServlet {
         if (!request.getParameter("url").isEmpty()) {
             url = new URL(request.getParameter("url"));
         }
+
         Byte[] imageByteArray = null;
         if (imagePart != null) {
             System.out.println(imagePart.getContentType());
@@ -105,48 +121,16 @@ public class CreateServlet extends HttpServlet {
                 content = url;
             }
         }
-
-
-
-//        Object content = null;
-//        System.out.println(text == null);
-//        if (!text.isEmpty()) {
-//            System.out.println(1);
-//            note = new TextNote();
-//            content = text;
-//        }
-//        if (imagePart != null) {
-//            System.out.println(2);
-//            if (note == null) {
-//                System.out.println(3);
-//                note = new ImageNote();
-//                content = imageByteArray;
-//            } else {
-////                text + image note
-//                System.out.println(4);
-//                Map<String, Object> c = new HashMap<>();
-//                Note imageNote = new ImageNote();
-//                CompositeNote cnote = new CompositeNote();
-//                cnote.add(note, imageNote);
-//                c.put("text", text);
-//                c.put("image", imageByteArray);
-//                note = cnote;
-//                content = c;
-//            }
-//        }
-
-
-        if (new NoteSaver(note).save(title, label, content)) {
+        note.setId(id);
+        if (new NoteSaver(note).save(title, label, content)){
             response.sendRedirect("/");
-        } else {
+        }else{
             request.setAttribute("errors", "an error occurred when saving the note");
 
             ServletContext context = getServletContext();
-            RequestDispatcher dispatch = context.getRequestDispatcher("/create.jsp");
+            RequestDispatcher dispatch = context.getRequestDispatcher("/edit.jsp");
             dispatch.forward(request, response);
-            response.sendRedirect("/create");
+            response.sendRedirect("/edit/" + id);
         }
     }
-
-
 }

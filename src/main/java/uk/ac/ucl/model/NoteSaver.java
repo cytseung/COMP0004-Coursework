@@ -2,9 +2,11 @@ package uk.ac.ucl.model;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 public class NoteSaver {
     private Note note;
+    private int idCount;
 
     public NoteSaver(Note note) {
         this.note = note;
@@ -15,14 +17,28 @@ public class NoteSaver {
             note.setTitle(title);
             note.setContent(content);
             note.setLabel(label);
-            note.setCreatedAt(LocalDateTime.now());
             Model model = ModelFactory.getModel();
-            List<Note> notes = model.getNotes();
-            note.setId(notes.size() + 1);
-            notes.add(note);
-            model.setNotes(notes);
+            if (note.getId().isEmpty()) {
+//            create operation
+                note.setId(UUID.randomUUID().toString());
+                List<Note> notes = model.getNotes();
+                notes.add(note);
+                model.setNotes(notes);
+                note.setCreatedAt(LocalDateTime.now());
+            } else {
+//                edit operation
+                List<Note> notes = model.getNotes();
+//                replace existing with new note
+                Note existing = model.getNote(note.getId());
+                note.setCreatedAt(existing.getCreatedAt());
+                notes.remove(model.getNote(note.getId()));
+                notes.add(note);
+                model.setNotes(notes);
+            }
             model.save();
             return true;
+
+
         } catch (Exception e) {
             return false;
         }

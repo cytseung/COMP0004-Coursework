@@ -2,6 +2,7 @@
 <%@ page import="uk.ac.ucl.model.Note" %>
 <%@ page import="java.time.LocalDateTime" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>
+<%@ page import="java.util.Collections" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +15,7 @@
     <%
         List<Note> notes = (List<Note>) request.getAttribute("notes");
         for (Note note : notes) {
-            Integer id = note.getId();
+            String id = note.getId();
             String title = note.getTitle();
             String label = note.getLabel();
             LocalDateTime createdAt = note.getCreatedAt();
@@ -24,8 +25,8 @@
                 formatCreatedAt = createdAt.format(formatter);
 
             }
-            String href = String.format("/note/%d", id);
-
+            String href = String.format("/note/%s", id);
+            String hrefEdit = String.format("/edit/%s", id);
     %>
     <li>
         <a href="<%=href%>">
@@ -34,6 +35,8 @@
             <%=label%>
             <%=formatCreatedAt%>
         </a>
+        <a href="<%=hrefEdit%>">Edit</a>
+        <a>Delete</a>
     </li>
     <% } %>
 </ul>

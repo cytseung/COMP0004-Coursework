@@ -4,18 +4,18 @@ import java.time.LocalDateTime;
 import java.util.Map;
 
 public abstract class AbstractNote<T> implements Note<T> {
-    private int id;
+    private String id = "";
     private String title;
     private String label;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     T content;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

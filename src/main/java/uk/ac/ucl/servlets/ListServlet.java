@@ -12,13 +12,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @WebServlet("/")
 public class ListServlet extends HttpServlet {
+    private class sortByCreatedAt implements Comparator<Note>{
+        public int compare(Note a, Note b){
+            return a.getCreatedAt().compareTo(b.getCreatedAt());
+        }
+    }
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
         Model model = ModelFactory.getModel();
         List<Note> notes = model.getNotes();
+        Collections.sort(notes, new sortByCreatedAt());
         if (notes != null) {
             request.setAttribute("notes", notes);
         }
