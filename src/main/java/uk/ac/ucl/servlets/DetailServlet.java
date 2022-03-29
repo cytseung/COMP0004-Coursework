@@ -19,14 +19,10 @@ public class DetailServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String param = request.getPathInfo();
         String id = param.substring(1);
-        System.out.println(id);
         Model model = ModelFactory.getModel();
         List<Note> notes = model.getNotes();
-        System.out.println(notes);
         if (notes != null) {
-//            Note note = notes.stream().filter(n -> (n.getId() == id)).findFirst().orElse(null);
             Note note = model.getNote(id);
-            System.out.println(note.getClass());
             request.setAttribute("note", note);
         }
         ServletContext context = getServletContext();

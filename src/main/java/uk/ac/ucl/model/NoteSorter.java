@@ -1,4 +1,4 @@
-package uk.ac.ucl.util;
+package uk.ac.ucl.model;
 
 import uk.ac.ucl.model.Note;
 

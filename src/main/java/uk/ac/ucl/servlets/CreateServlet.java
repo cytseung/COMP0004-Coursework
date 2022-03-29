@@ -43,18 +43,13 @@ public class CreateServlet extends HttpServlet {
         }
         Byte[] imageByteArray = null;
         if (imagePart != null) {
-            System.out.println(imagePart.getContentType());
-            System.out.println(imagePart.getSubmittedFileName());
             String contentType = imagePart.getContentType();
             Pattern pattern = Pattern.compile("^image/.*$");
-            System.out.println(pattern.matcher("image/jpeg").find());
             if (pattern.matcher(contentType).find()) {
 //                file type is image
-                System.out.println("contains an image");
                 InputStream imageContent = imagePart.getInputStream();
                 imageByteArray = toObject(imageContent.readAllBytes());
             } else {
-                System.out.println("does not contain an image");
                 imagePart = null;
             }
         }
@@ -106,34 +101,6 @@ public class CreateServlet extends HttpServlet {
             }
         }
 
-
-
-//        Object content = null;
-//        System.out.println(text == null);
-//        if (!text.isEmpty()) {
-//            System.out.println(1);
-//            note = new TextNote();
-//            content = text;
-//        }
-//        if (imagePart != null) {
-//            System.out.println(2);
-//            if (note == null) {
-//                System.out.println(3);
-//                note = new ImageNote();
-//                content = imageByteArray;
-//            } else {
-////                text + image note
-//                System.out.println(4);
-//                Map<String, Object> c = new HashMap<>();
-//                Note imageNote = new ImageNote();
-//                CompositeNote cnote = new CompositeNote();
-//                cnote.add(note, imageNote);
-//                c.put("text", text);
-//                c.put("image", imageByteArray);
-//                note = cnote;
-//                content = c;
-//            }
-//        }
 
 
         if (new NoteSaver(note).save(title, label, content)) {

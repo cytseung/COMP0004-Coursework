@@ -3,7 +3,7 @@ package uk.ac.ucl.servlets;
 import uk.ac.ucl.model.Model;
 import uk.ac.ucl.model.ModelFactory;
 import uk.ac.ucl.model.Note;
-import uk.ac.ucl.util.NoteSorter;
+import uk.ac.ucl.model.NoteSorter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -13,11 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.net.URL;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @WebServlet(name = "search", urlPatterns = {"/search/*"})
 public class SearchServlet extends HttpServlet {
@@ -28,7 +25,6 @@ public class SearchServlet extends HttpServlet {
     }
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String keyword = request.getParameter("search");
-        System.out.println(keyword);
         String sort = request.getParameter("sort");
         String mode = request.getParameter("mode");
         Model model = ModelFactory.getModel();

@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Map;
 
 public abstract class AbstractNote<T> implements Note<T> {
+    private static final long serialVersionUID = 1L;
     private String id = "";
     private String title;
     private String label;

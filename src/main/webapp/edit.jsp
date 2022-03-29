@@ -35,7 +35,6 @@
             if (entry.getKey() == "text") {
                 text = (String) entry.getValue();
             } else if (entry.getKey() == "image") {
-                System.out.println("here");
                 image = (Byte[]) entry.getValue();
                 imgbytes = new byte[image.length];
                 int i = 0;
@@ -92,4 +91,5 @@
 </form>
 <%}%>
 </body>
+<div><a href="/">Back to Homepage</a></div>
 </html>

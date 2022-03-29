@@ -14,7 +14,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 import java.io.IOException;
 
 
@@ -24,7 +23,6 @@ public class DeleteServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
         String id = request.getParameter("id");
-        System.out.println(id);
         Model model = ModelFactory.getModel();
         Note note = model.getNote(id);
 

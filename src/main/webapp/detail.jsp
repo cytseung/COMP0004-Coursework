@@ -27,15 +27,12 @@
 
         LocalDateTime createdAt = note.getCreatedAt();
         LocalDateTime updatedAt = note.getUpdatedAt();
-//        System.out.println(note);
-//        System.out.println(note.getContent());
         note.getContent();
         Map<String, Object> content = (Map<String, Object>) note.getContent();
         for (Map.Entry entry : content.entrySet()) {
             if (entry.getKey() == "text") {
                 text = (String) entry.getValue();
             } else if (entry.getKey() == "image") {
-                System.out.println("here");
                 image = (Byte[]) entry.getValue();
                 imgbytes = new byte[image.length];
                 int i = 0;
@@ -87,4 +84,5 @@
 <%}%>
 <%}%>
 </body>
+<div><a href="/">Back to Homepage</a></div>
 </html>

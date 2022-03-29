@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ImageNote extends AbstractNote<Byte[]>{
-//    private Byte[] content;
     @Override
     public Map<String, Byte[]> getContent(){
         Map<String, Byte[]> content_d = new HashMap<>();

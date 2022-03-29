@@ -31,13 +31,10 @@ public class UpdateServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String param = request.getPathInfo();
         String id = param.substring(1);
-        System.out.println(id);
         Model model = ModelFactory.getModel();
         List<Note> notes = model.getNotes();
         if (notes != null) {
-//            Note note = notes.stream().filter(n -> (n.getId() == id)).findFirst().orElse(null);
             Note note = model.getNote(id);
-            System.out.println(note.getClass());
             request.setAttribute("note", note);
         }
         ServletContext context = getServletContext();
@@ -47,7 +44,6 @@ public class UpdateServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
         String id = request.getParameter("id");
-        System.out.println(id);
         String title = request.getParameter("title");
         String label = request.getParameter("label");
         String text = request.getParameter("text");
@@ -59,18 +55,13 @@ public class UpdateServlet extends HttpServlet {
 
         Byte[] imageByteArray = null;
         if (imagePart != null) {
-            System.out.println(imagePart.getContentType());
-            System.out.println(imagePart.getSubmittedFileName());
             String contentType = imagePart.getContentType();
             Pattern pattern = Pattern.compile("^image/.*$");
-            System.out.println(pattern.matcher("image/jpeg").find());
             if (pattern.matcher(contentType).find()) {
 //                file type is image
-                System.out.println("contains an image");
                 InputStream imageContent = imagePart.getInputStream();
                 imageByteArray = toObject(imageContent.readAllBytes());
             } else {
-                System.out.println("does not contain an image");
                 imagePart = null;
             }
         }

@@ -39,18 +39,6 @@ public class CompositeNote extends AbstractNote<Map<String, Object>> {
         return contents;
     }
 
-    //    public void setContent(Map<String, Object> content) {
-//        System.out.println("hey");
-//        for (Note n : children) {
-//            for (Map.Entry entry : content.entrySet()) {
-//                if (entry.getKey() == "text")
-//                    n.setContent(entry.getValue());
-//                else if (entry.getKey() == "image")
-//                    n.setContent(entry.getValue());
-//            }
-//
-//        }
-//    }
     @Override
     public void setContent(Map<String, Object> content) {
         for (Note n : children) {

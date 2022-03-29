@@ -3,7 +3,7 @@ package uk.ac.ucl.servlets;
 import uk.ac.ucl.model.Model;
 import uk.ac.ucl.model.ModelFactory;
 import uk.ac.ucl.model.Note;
-import uk.ac.ucl.util.NoteSorter;
+import uk.ac.ucl.model.NoteSorter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -13,19 +13,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.net.URL;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @WebServlet("/")
 public class ListServlet extends HttpServlet {
-    //    private class sortByCreatedAt implements Comparator<Note>{
-//        public int compare(Note a, Note b){
-//            return a.getCreatedAt().compareTo(b.getCreatedAt());
-//        }
-//    }
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String sort = request.getParameter("sort");
         String mode = request.getParameter("mode");

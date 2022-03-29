@@ -32,4 +32,5 @@
         <%=error%>
 </p>
 </body>
+<div><a href="/">Back to Homepage</a></div>
 </html>

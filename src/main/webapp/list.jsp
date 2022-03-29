@@ -49,7 +49,8 @@
                 for (Map.Entry entry : content.entrySet()) {
                     if (entry.getKey() == "text") {
                         String text = (String) entry.getValue();%>
-            <p><%=text%></p>
+            <p><%=text%>
+            </p>
             <%
             } else if (entry.getKey() == "image") {
                 Byte[] image = (Byte[]) entry.getValue();
@@ -60,27 +61,31 @@
                 }
                 String imgStr = Base64.getEncoder().encodeToString(imgbytes); %>
             <img alt="img" src="data:image/jpeg;base64, <%=imgStr%>"/>
-            <%} else if (entry.getKey() == "url") {
+            <%
+            } else if (entry.getKey() == "url") {
+                URL url = (URL) entry.getValue();
+            %>
+            <p><a href="<%=url%>"><%=url%>
+            </a></p>
+            <%
+                    }
+                }
+            } else if (summary != null && summary == true) {
+                Map<String, Object> content = note.getContent();
+                for (Map.Entry entry : content.entrySet()) {
+                    if (entry.getKey() == "text") {
+                        String text = (String) entry.getValue();
+                        if (text.length() > 20)
+                            text = text.substring(20) + "...";
+            %>
+            <span><%=text%></span>
+            <% } else if (entry.getKey() == "url") {
                 URL url = (URL) entry.getValue();%>
-            <p><a href="<%=url%>"><%=url%></a></p>
+            <span><a href="<%=url%>"><%=url%></a></span>
             <%
                         }
                     }
-                } else if (summary != null && summary == true){
-                    Map<String, Object> content = note.getContent();
-                    for (Map.Entry entry : content.entrySet()) {
-                    if (entry.getKey() == "text") {
-                    String text = (String) entry.getValue();
-                if (text.length() > 20)
-                    text = text.substring(20) + "...";
-                %>
-            <span><%=text%></span>
-               <% }
-                   else if (entry.getKey() == "url") {
-                   URL url = (URL) entry.getValue();%>
-            <span><a href="<%=url%>"><%=url%></a></span>
-            <%
-            }}}
+                }
             %>
         </div>
         <a href="<%=hrefEdit%>">Edit</a>
@@ -125,6 +130,9 @@
     </c:otherwise>
 </c:choose>
 <a href="${pageContext.request.requestURL.substring(0,pageContext.request.requestURL.length()-8)}">Back to default</a>
+
+<div><span><a href="create">Create</a></span>
+    <span><a href="search">Search</a></span></div>
 
 </body>
 
