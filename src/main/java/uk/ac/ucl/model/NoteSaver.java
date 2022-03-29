@@ -6,7 +6,6 @@ import java.util.UUID;
 
 public class NoteSaver {
     private Note note;
-    private int idCount;
 
     public NoteSaver(Note note) {
         this.note = note;
