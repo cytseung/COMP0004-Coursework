@@ -1,79 +1,32 @@
 package uk.ac.ucl.model;
 
-import javax.swing.*;
-
 import java.io.Serializable;
-import java.net.URL;
+import java.time.LocalDateTime;
+import java.util.Map;
 
-//POJO
-public class Note implements Serializable {
-    static private int counter = 1;
-    private int id = counter++;
-    private String title;
-    private String label;
-    private String text;
-    private URL url;
-    private ImageIcon image;
-    private byte[] data;
+public interface Note<T> extends Serializable {
 
-    public int getId() {
-        return id;
-    }
+    int getId();
 
-    public String getLabel() {
-        return label;
-    }
+    void setId(int id);
 
-    public String getText() {
-        return text;
-    }
+    String getTitle();
 
-    public URL getUrl() {
-        return url;
-    }
+    void setTitle(String title);
 
-    public ImageIcon getImage() {
-        return image;
-    }
+    String getLabel();
 
-    public byte[] getData() {
-        return data;
-    }
-    public String getTitle() {
-        return title;
-    }
+    void setLabel(String label);
 
+    LocalDateTime getCreatedAt();
 
-    public void setText(String text) {
-        this.text = text;
-    }
+    void setCreatedAt(LocalDateTime createdAt);
 
-    public void setUrl(URL url) {
-        this.url = url;
-    }
+    LocalDateTime getUpdatedAt();
 
-    public void setImage(ImageIcon image) {
-        this.image = image;
-    }
+    void setUpdatedAt(LocalDateTime updatedAt);
 
-    public void setData(byte[] data) {
-        this.data = data;
-    }
+    Map<String, T> getContent();
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
-    }
-
-    @Override
-    public String toString(){
-        return "Note " + id + ": " + title;
-    }
-
-
-
-
+    void setContent(T content);
 }

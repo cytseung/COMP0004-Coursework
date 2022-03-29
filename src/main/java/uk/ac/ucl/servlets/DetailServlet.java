@@ -14,16 +14,20 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/")
-public class ListServlet extends HttpServlet {
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
+@WebServlet(name = "detail", urlPatterns = {"/note/*"})
+public class DetailServlet extends HttpServlet {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String param = request.getPathInfo();
+        int id = Integer.parseInt(param.substring(1, param.length()));
         Model model = ModelFactory.getModel();
         List<Note> notes = model.getNotes();
+        System.out.println(notes);
         if (notes != null) {
-            request.setAttribute("notes", notes);
+            Note note = notes.stream().filter(n -> (n.getId() == id)).findFirst().orElse(null);
+            request.setAttribute("note", note);
         }
         ServletContext context = getServletContext();
-        RequestDispatcher dispatch = context.getRequestDispatcher("/list.jsp");
+        RequestDispatcher dispatch = context.getRequestDispatcher("/detail.jsp");
         dispatch.forward(request, response);
     }
 }
