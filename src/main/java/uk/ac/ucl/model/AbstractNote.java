@@ -53,10 +53,11 @@ public abstract class AbstractNote<T> implements Note<T> {
 
     public abstract Map<String, T> getContent();
 
-    public void setContent(T content) {
+    public void setContent(T content){
         this.content = content;
     }
+
     public String toString() {
-        return "Note " + id + ": " + title + content;
+        return "Note " + id + ": " + title + getContent();
     }
 }

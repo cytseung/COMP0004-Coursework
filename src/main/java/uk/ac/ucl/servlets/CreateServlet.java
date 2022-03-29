@@ -41,33 +41,17 @@ public class CreateServlet extends HttpServlet {
             System.out.println(imagePart.getContentType());
             System.out.println(imagePart.getSubmittedFileName());
             String contentType = imagePart.getContentType();
-            Collection<String> headerNames = imagePart.getHeaderNames();
-            System.out.println(headerNames);
-            String value1 = imagePart.getHeader("content-disposition");
-            String value2 = imagePart.getHeader("content-type");
-            System.out.println(value1);
-            System.out.println(value2);
             Pattern pattern = Pattern.compile("^image/.*$");
             System.out.println(pattern.matcher("image/jpeg").find());
             if (pattern.matcher(contentType).find()) {
 //                file type is image
                 System.out.println("contains an image");
                 InputStream imageContent = imagePart.getInputStream();
-//                byte[] encoded = Base64.getEncoder().encode(imageContent.readAllBytes());
                 imageByteArray =  toObject(imageContent.readAllBytes());
             } else {
                 System.out.println("does not contain an image");
                 imagePart = null;
             }
-//            File f = new File(Config.imagepath);
-//            f.createNewFile();
-//            imagePart.write(Config.imagepath);
-//            InputStream imageContent = imagePart.getInputStream();
-//            imageByteArray = imageContent.readAllBytes();
-//            System.out.println(imageByteArray);
-//            BufferedImage newImage = ImageIO.read(imageContent);
-//            System.out.println(newImage == null);
-//            ImageIO.write(newImage, "jpg", new File(Config.imagepath));
         }
         Note note = null;
         Object content = null;
@@ -93,6 +77,7 @@ public class CreateServlet extends HttpServlet {
                 cnote.add(note, imageNote);
                 c.put("text", text);
                 c.put("image", imageByteArray);
+                note = cnote;
                 content = c;
             }
         }

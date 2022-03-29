@@ -16,4 +16,5 @@ public class TextNote extends AbstractNote<String> {
         content_d.put("text", content);
         return content_d;
     }
+
 }

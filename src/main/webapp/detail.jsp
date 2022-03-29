@@ -3,16 +3,10 @@
 <%@ page import="java.time.LocalDateTime" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ page import="java.util.Map" %>
-<%@ page import="java.awt.*" %>
-<%@ page import="javax.swing.*" %>
-<%@ page import="java.util.Base64" %><%--
-  Created by IntelliJ IDEA.
-  User: admin
-  Date: 28/3/2022
-  Time: 1:10 PM
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="java.util.Base64" %>
+<%@ page import="java.util.HashMap" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <title>Notes</title>
@@ -30,7 +24,9 @@
         String imgStr = "";
 
         LocalDateTime createdAt = note.getCreatedAt();
-        System.out.println(note.getContent());
+//        System.out.println(note);
+//        System.out.println(note.getContent());
+        note.getContent();
         Map<String, Object> content = (Map<String, Object>) note.getContent();
         for (Map.Entry entry : content.entrySet()) {
             if (entry.getKey() == "text") {
@@ -38,15 +34,12 @@
             } else if (entry.getKey() == "image") {
                 System.out.println("here");
                 image = (Byte[]) entry.getValue();
-                System.out.println(image);
                 imgbytes = new byte[image.length];
                 int i = 0;
                 for (Byte b : image) {
                     imgbytes[i++] = b.byteValue();
                 }
                 imgStr = Base64.getEncoder().encodeToString(imgbytes);
-                System.out.println(imgStr);
-                Image img = new ImageIcon(imgbytes).getImage();
             }
         }
         String formatCreatedAt = "";
@@ -69,7 +62,7 @@
 <%}%>
 <%if (image != null) {%>
 <%--<p>image: <%=imgStr%>--%>
-    <img alt="img" src="data:image/jpeg;base64, <%=imgStr%>"/>
+<img alt="img" src="data:image/jpeg;base64, <%=imgStr%>"/>
 </p>
 <%}%>
 <p>created: <%=formatCreatedAt%>
