@@ -5,6 +5,7 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.Base64" %>
 <%@ page import="java.util.HashMap" %>
+<%@ page import="java.net.URL" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
@@ -22,6 +23,7 @@
         Byte[] image = null;
         byte[] imgbytes = null;
         String imgStr = "";
+        URL url = null;
 
         LocalDateTime createdAt = note.getCreatedAt();
 //        System.out.println(note);
@@ -40,6 +42,8 @@
                     imgbytes[i++] = b.byteValue();
                 }
                 imgStr = Base64.getEncoder().encodeToString(imgbytes);
+            }else if (entry.getKey() == "url"){
+                url = (URL) entry.getValue();
             }
         }
         String formatCreatedAt = "";
@@ -63,6 +67,10 @@
 <%if (image != null) {%>
 <%--<p>image: <%=imgStr%>--%>
 <img alt="img" src="data:image/jpeg;base64, <%=imgStr%>"/>
+</p>
+<%}%>
+<% if (url != null) {%>
+<p>Url: <%=url%>
 </p>
 <%}%>
 <p>created: <%=formatCreatedAt%>
