@@ -13,9 +13,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Collections;
-import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet("/")
 public class ListServlet extends HttpServlet {
@@ -26,12 +28,18 @@ public class ListServlet extends HttpServlet {
 //    }
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String sort = request.getParameter("sort");
+        String mode = request.getParameter("mode");
         Model model = ModelFactory.getModel();
         List<Note> notes = model.getNotes();
         if (sort == null || sort.equals("created") || sort.isEmpty()) {
             Collections.sort(notes, new NoteSorter.sortByCreatedAt());
         } else {
             Collections.sort(notes, new NoteSorter.sortByTitle());
+        }
+        if (mode != null && mode.equals("summary")){
+            request.setAttribute("summary", true);
+        }else if (mode != null && mode.equals("full")){
+            request.setAttribute("full", true);
         }
         if (notes != null) {
             request.setAttribute("notes", notes);

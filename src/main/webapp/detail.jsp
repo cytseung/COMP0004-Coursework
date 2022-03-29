@@ -76,7 +76,7 @@
 </p>
 <%}%>
 <% if (url != null) {%>
-<p>Url: <%=url%>
+<p>Url: <a href="<%=url%>"><%=url%></a>
 </p>
 <%}%>
 <p>Created: <%=formatCreatedAt%>
