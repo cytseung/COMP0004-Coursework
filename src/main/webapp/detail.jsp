@@ -26,6 +26,7 @@
         URL url = null;
 
         LocalDateTime createdAt = note.getCreatedAt();
+        LocalDateTime updatedAt = note.getUpdatedAt();
 //        System.out.println(note);
 //        System.out.println(note.getContent());
         note.getContent();
@@ -47,21 +48,26 @@
             }
         }
         String formatCreatedAt = "";
+        String formatUpdatedAt = "";
         if (createdAt != null) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             formatCreatedAt = createdAt.format(formatter);
         }
+        if (updatedAt != null) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            formatUpdatedAt = updatedAt.format(formatter);
+        }
 
 %>
-<p>id: <%=id%>
+<p>Id: <%=id%>
 </p>
 
-<p>title: <%=title%>
+<p>Title: <%=title%>
 </p>
-<p>label: <%=label%>
+<p>Label: <%=label%>
 </p>
 <% if (text != "") {%>
-<p>text: <%=text%>
+<p>Text: <%=text%>
 </p>
 <%}%>
 <%if (image != null) {%>
@@ -73,8 +79,12 @@
 <p>Url: <%=url%>
 </p>
 <%}%>
-<p>created: <%=formatCreatedAt%>
+<p>Created: <%=formatCreatedAt%>
 </p>
+<% if (formatUpdatedAt != ""){ %>
+<p>Updated: <%=formatUpdatedAt%>
+</p>
+<%}%>
 <%}%>
 </body>
 </html>

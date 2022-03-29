@@ -31,6 +31,7 @@ public class NoteSaver {
 //                replace existing with new note
                 Note existing = model.getNote(note.getId());
                 note.setCreatedAt(existing.getCreatedAt());
+                note.setUpdatedAt(LocalDateTime.now());
                 notes.remove(model.getNote(note.getId()));
                 notes.add(note);
                 model.setNotes(notes);
