@@ -3,8 +3,10 @@ package uk.ac.ucl.model;
 import uk.ac.ucl.Config;
 
 import java.io.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -55,11 +57,14 @@ public class Model {
     }
 
     public List<Note> searchFor(String keyword) {
+        String kw = keyword.toLowerCase();
         return notes.stream()
-                .filter(note -> (note.getTitle().contains(keyword)
-//                        || note.getText().contains(keyword)
-//                        || note.getUrl().toString().contains(keyword)
-                        || note.getLabel().contains(keyword)))
+                .filter(note -> (note.getTitle().toLowerCase().contains(kw)
+//                        || (note instanceof TextNote && ((TextNote) note).getContent().get("text").contains(keyword)
+//                        || (note instanceof URLNote && note.getUrl().toString().contains(keyword)
+                        || (note.getContent().containsKey("text") && ((String) note.getContent().get("text")).toLowerCase().contains(kw))
+                        || (note.getContent().containsKey("url") && ((URL) note.getContent().get("url")).toString().toLowerCase().contains(kw))
+                        || note.getLabel().toLowerCase().contains(kw)))
                 .collect(Collectors.toList());
     }
 }
