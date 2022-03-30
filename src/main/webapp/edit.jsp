@@ -10,6 +10,7 @@
     <title>Notes</title>
 </head>
 <body>
+<jsp:include page="/header.jsp"/>
 <%
     Note note = (Note) request.getAttribute("note");
     if (note != null) {
@@ -80,7 +81,7 @@
         <input id="url" name="url" type="url" value=""/>
         <%}%>
     </p>
-    <input type="submit"/>
+    <input type="submit" value="submit"/>
 </form>
 </form>
 <%}%>

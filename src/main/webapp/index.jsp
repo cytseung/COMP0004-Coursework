@@ -14,6 +14,7 @@
     <title>Notes</title>
 </head>
 <body>
+<jsp:include page="/header.jsp"/>
 <% Boolean full = (Boolean) request.getAttribute("full");
     Boolean summary = (Boolean) request.getAttribute("summary");%>
 <ul>

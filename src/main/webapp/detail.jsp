@@ -12,6 +12,7 @@
     <title>Notes</title>
 </head>
 <body>
+<jsp:include page="/header.jsp"/>
 <%
     Note note = (Note) request.getAttribute("note");
     if (note != null) {

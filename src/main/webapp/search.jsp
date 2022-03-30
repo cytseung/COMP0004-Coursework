@@ -8,6 +8,7 @@
     <title>Notes</title>
 </head>
 <body>
+<jsp:include page="/header.jsp"/>
 <form action="search" method="post">
     <label for="search">Search:</label>
     <input id="search" name="search" type="text">
