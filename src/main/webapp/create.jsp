@@ -1,5 +1,3 @@
-<%@ page import="java.util.List" %>
-<%@ page import="uk.ac.ucl.model.Note" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,14 +21,6 @@
     <input id="others" name="other" type="file"/>
     <input type="submit"/>
 </form>
-<%
-    String error = (String) request.getAttribute("error");
-
-%>
-<p>
-    <% if (error != null)%>
-        <%=error%>
-</p>
 </body>
 <div><a href="/">Back to Homepage</a></div>
 </html>

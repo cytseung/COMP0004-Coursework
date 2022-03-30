@@ -1,9 +1,11 @@
 package uk.ac.ucl.model;
 
+import java.io.Serial;
 import java.time.LocalDateTime;
 import java.util.Map;
 
 public abstract class AbstractNote<T> implements Note<T> {
+    @Serial
     private static final long serialVersionUID = 1L;
     private String id = "";
     private String title;

@@ -1,13 +1,7 @@
 <%@ page import="uk.ac.ucl.model.Note" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>
-<%@ page import="java.time.LocalDateTime" %><%--
-  Created by IntelliJ IDEA.
-  User: admin
-  Date: 30/3/2022
-  Time: 12:05 AM
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="java.time.LocalDateTime" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -38,7 +32,6 @@
     %>
     <li>
         <a href="<%=href%>">
-            <%--            <%=id%>--%>
             <%=title%>
             <%=label%>
             <%=formatCreatedAt%>

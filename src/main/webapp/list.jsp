@@ -38,7 +38,6 @@
     %>
     <li>
         <a href="<%=href%>">
-            <%--            <%=id%>--%>
             <%=title%>
             <%=label%>
             <%=formatCreatedAt%>
@@ -70,7 +69,7 @@
             <%
                     }
                 }
-            } else if (summary != null && summary == true) {
+            } else if (summary != null && summary) {
                 Map<String, Object> content = note.getContent();
                 for (Map.Entry entry : content.entrySet()) {
                     if (entry.getKey() == "text") {

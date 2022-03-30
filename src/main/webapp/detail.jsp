@@ -4,7 +4,6 @@
 <%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.Base64" %>
-<%@ page import="java.util.HashMap" %>
 <%@ page import="java.net.URL" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 

@@ -1,6 +1,5 @@
 package uk.ac.ucl.model;
 
-import uk.ac.ucl.model.Note;
 
 import java.util.Comparator;
 

@@ -112,7 +112,8 @@ public class UpdateServlet extends HttpServlet {
                 content = url;
             }
         }
-        note.setId(id);
+        if (note != null)
+            note.setId(id);
         if (new NoteSaver(note).save(title, label, content)){
             response.sendRedirect("/");
         }else{

@@ -3,13 +3,7 @@
 <%@ page import="java.time.LocalDateTime" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.Base64" %>
-<%@ page import="java.time.format.DateTimeFormatter" %><%--
-  Created by IntelliJ IDEA.
-  User: admin
-  Date: 29/3/2022
-  Time: 1:56 PM
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>

@@ -59,7 +59,7 @@ public class Model {
         return notes.stream()
                 .filter(note -> (note.getTitle().toLowerCase().contains(kw)
                         || (note.getContent().containsKey("text") && ((String) note.getContent().get("text")).toLowerCase().contains(kw))
-                        || (note.getContent().containsKey("url") && ((URL) note.getContent().get("url")).toString().toLowerCase().contains(kw))
+                        || (note.getContent().containsKey("url") && (note.getContent().get("url")).toString().toLowerCase().contains(kw))
                         || note.getLabel().toLowerCase().contains(kw)))
                 .collect(Collectors.toList());
     }
