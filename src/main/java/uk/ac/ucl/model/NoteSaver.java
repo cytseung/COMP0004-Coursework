@@ -20,10 +20,10 @@ public class NoteSaver {
             if (note.getId().isEmpty()) {
 //            create operation
                 note.setId(UUID.randomUUID().toString());
+                note.setCreatedAt(LocalDateTime.now());
                 List<Note> notes = model.getNotes();
                 notes.add(note);
                 model.setNotes(notes);
-                note.setCreatedAt(LocalDateTime.now());
             } else {
 //                edit operation
                 List<Note> notes = model.getNotes();

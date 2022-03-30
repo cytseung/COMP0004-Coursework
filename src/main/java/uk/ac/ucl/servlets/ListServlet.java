@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
-@WebServlet("/")
+@WebServlet("/index.html")
 public class ListServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String sort = request.getParameter("sort");
@@ -37,7 +37,7 @@ public class ListServlet extends HttpServlet {
             request.setAttribute("notes", notes);
         }
         ServletContext context = getServletContext();
-        RequestDispatcher dispatch = context.getRequestDispatcher("/list.jsp");
+        RequestDispatcher dispatch = context.getRequestDispatcher("/index.jsp");
         dispatch.forward(request, response);
     }
 }

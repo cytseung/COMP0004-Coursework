@@ -128,7 +128,7 @@
         <a href="?mode=full">Full Note</a>
     </c:otherwise>
 </c:choose>
-<a href="${pageContext.request.requestURL.substring(0,pageContext.request.requestURL.length()-8)}">Back to default</a>
+<a href="${pageContext.request.requestURL.substring(0,pageContext.request.requestURL.length()-9)}">Back to default</a>
 
 <div><span><a href="create">Create</a></span>
     <span><a href="search">Search</a></span></div>

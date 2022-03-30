@@ -3,7 +3,6 @@ package uk.ac.ucl.model;
 import uk.ac.ucl.Config;
 
 import java.io.*;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
