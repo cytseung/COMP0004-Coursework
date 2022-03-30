@@ -1,4 +1,8 @@
-package uk.ac.ucl.model;
+package uk.ac.ucl.model.util;
+
+import uk.ac.ucl.model.Model;
+import uk.ac.ucl.model.ModelFactory;
+import uk.ac.ucl.model.Note;
 
 import java.time.LocalDateTime;
 import java.util.List;

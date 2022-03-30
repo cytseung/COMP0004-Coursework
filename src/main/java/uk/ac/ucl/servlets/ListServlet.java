@@ -3,7 +3,7 @@ package uk.ac.ucl.servlets;
 import uk.ac.ucl.model.Model;
 import uk.ac.ucl.model.ModelFactory;
 import uk.ac.ucl.model.Note;
-import uk.ac.ucl.model.NoteSorter;
+import uk.ac.ucl.model.util.NoteSorter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;

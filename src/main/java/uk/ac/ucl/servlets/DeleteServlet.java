@@ -5,7 +5,7 @@ package uk.ac.ucl.servlets;
 import uk.ac.ucl.model.Model;
 import uk.ac.ucl.model.ModelFactory;
 import uk.ac.ucl.model.Note;
-import uk.ac.ucl.model.NoteDeleter;
+import uk.ac.ucl.model.util.NoteDeleter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
