@@ -48,6 +48,8 @@ public class UpdateServlet extends HttpServlet {
         String title = request.getParameter("title");
         String label = request.getParameter("label");
         String text = request.getParameter("text");
+        String hasOriginal = request.getParameter("hasOriginal");
+        Boolean hasOriginalImage = Boolean.parseBoolean(hasOriginal);
         Part imagePart = request.getPart("image");
         URL url = null;
         if (!request.getParameter("url").isEmpty()) {
@@ -76,6 +78,13 @@ public class UpdateServlet extends HttpServlet {
         }
         if (imageByteArray != null) {
             c.put("image", imageByteArray);
+        }else if (hasOriginalImage) {
+            Model model = ModelFactory.getModel();
+            List<Note> notes = model.getNotes();
+            if (notes != null) {
+                Note originalNote = model.getNote(id);
+                c.put("image", originalNote.getContent().get("image"));
+            }
         }
         if (url != null) {
             c.put("url", url);
@@ -105,9 +114,17 @@ public class UpdateServlet extends HttpServlet {
             if (c.containsKey("text")){
                 note = new TextNote();
                 content = text;
-            }else if (c.containsKey("image")){
+            }else if (c.containsKey("image") && imageByteArray != null){
                 note = new ImageNote();
                 content = imageByteArray;
+            }else if (hasOriginalImage){
+                note = new ImageNote();
+                Model model = ModelFactory.getModel();
+                List<Note> notes = model.getNotes();
+                if (notes != null) {
+                    Note originalNote = model.getNote(id);
+                    content = originalNote.getContent().get("image");
+                }
             }else if (c.containsKey("url")){
                 note = new URLNote();
                 content = url;

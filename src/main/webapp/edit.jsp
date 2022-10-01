@@ -67,6 +67,9 @@
         <%if (image != null) {%>
         <%--<p>image: <%=imgStr%>--%>
         <img alt="img" src="data:image/jpeg;base64, <%=imgStr%>"/>
+        <input id="hasOriginal" name="hasOriginal" type="hidden" value="true"/>
+        <%}else{%>
+        <input id="hasOriginal" name="hasOriginal" type="hidden" value="false"/>
         <%}%>
         <input id="image" name="image" type="file"/>
 
