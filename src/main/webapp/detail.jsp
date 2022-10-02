@@ -84,5 +84,5 @@
 <%}%>
 <%}%>
 </body>
-<div><a href="/">Back to Homepage</a></div>
+<div><a class="btn btn-primary btn-small" href="/">Back to Homepage</a></div>
 </html>
