@@ -9,15 +9,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Notes</title>
-</head>
-<body>
 <jsp:include page="/header.jsp"/>
+<body>
 <% Boolean full = (Boolean) request.getAttribute("full");
     Boolean summary = (Boolean) request.getAttribute("summary");%>
-<ul>
+<div class="main">
+
     <%
         List<Note> notes = (List<Note>) request.getAttribute("notes");
         for (Note note : notes) {
@@ -37,13 +34,21 @@
 
 
     %>
-    <li>
-        <a href="<%=href%>">
-            <%=title%>
+    <div class="list-item-container">
+        <div class="list-item-title">
+            <a href="<%=href%>">
+                <h3>
+                    <%=title%>
+                </h3>
+            </a>
+
+        </div>
+        <div class="list-item-datetime-label">
             <%=label%>
             <%=formatCreatedAt%>
-        </a>
-        <div>
+        </div>
+
+        <div class="list-item-content">
             <% if (full != null && full == true) {
                 Map<String, Object> content = note.getContent();
                 for (Map.Entry entry : content.entrySet()) {
@@ -60,7 +65,9 @@
                     imgbytes[i++] = b.byteValue();
                 }
                 String imgStr = Base64.getEncoder().encodeToString(imgbytes); %>
-            <img alt="img" src="data:image/jpeg;base64, <%=imgStr%>"/>
+            <div class="list-item-image">
+                <img alt="img" src="data:image/jpeg;base64, <%=imgStr%>"/>
+            </div>
             <%
             } else if (entry.getKey() == "url") {
                 URL url = (URL) entry.getValue();
@@ -88,51 +95,82 @@
                 }
             %>
         </div>
-        <a href="<%=hrefEdit%>">Edit</a>
-        <form action="delete/" method="POST">
-            <input type="hidden" id="id" name="id" value="<%=id%>">
-            <Input type="submit" value="Delete">
-        </form>
-    </li>
+        <div class="list-item-actions">
+            <a class="btn btn-primary btn-sm" href="<%=hrefEdit%>">Edit</a>
+            <form action="delete/" method="POST">
+                <input type="hidden" id="id" name="id" value="<%=id%>">
+                <Input class="btn btn-danger btn-sm" type="submit" value="Delete">
+            </form>
+        </div>
+    </div>
     <% } %>
-</ul>
-<c:choose>
-    <c:when test="${pageContext.request.queryString.contains('mode')}">
-        <c:if test="${!pageContext.request.queryString.contains('sort')}">
-            <a href="?${pageContext.request.queryString}&sort=created">Sort by Created</a>
-            <a href="?${pageContext.request.queryString}&sort=title">Sort by Title</a>
-        </c:if>
-        <c:if test="${pageContext.request.queryString.contains('sort')}">
-            <a href="?${pageContext.request.queryString.replace("title", "created")}">Sort by Created</a>
-            <a href="?${pageContext.request.queryString.replace("created", "title")}">Sort by Title</a>
-        </c:if>
-    </c:when>
-    <c:otherwise>
-        <a href="?sort=created">Sort by Created</a>
-        <a href="?sort=title">Sort by Title</a>
-    </c:otherwise>
-</c:choose>
-
-<c:choose>
-    <c:when test="${pageContext.request.queryString.contains('sort')}">
-        <c:if test="${!pageContext.request.queryString.contains('mode')}">
-            <a href="?${pageContext.request.queryString}&mode=summary">Summary</a>
-            <a href="?${pageContext.request.queryString}&mode=full">Full Note</a>
-        </c:if>
-        <c:if test="${pageContext.request.queryString.contains('mode')}">
-            <a href="?${pageContext.request.queryString.replace("full", "summary")}">Summary</a>
-            <a href="?${pageContext.request.queryString.replace("summary","full")}">Full Note</a>
-        </c:if>
-    </c:when>
-    <c:otherwise>
-        <a href="?mode=summary">Summary</a>
-        <a href="?mode=full">Full Note</a>
-    </c:otherwise>
-</c:choose>
-<a href="${pageContext.request.requestURL.substring(0,pageContext.request.requestURL.length()-9)}">Back to default</a>
-
-<div><span><a href="create">Create</a></span>
-    <span><a href="search">Search</a></span></div>
+</div>
+<div class="index-actions">
+    <c:choose>
+        <c:when test="${pageContext.request.queryString.contains('mode')}">
+            <c:if test="${!pageContext.request.queryString.contains('sort')}">
+                <div class="btn btn-primary action-item">
+                    <a href="?${pageContext.request.queryString}&sort=created">Sort by Created</a>
+                </div>
+                <div class="btn btn-primary action-item">
+                    <a href="?${pageContext.request.queryString}&sort=title">Sort by Title</a>
+                </div>
+            </c:if>
+            <c:if test="${pageContext.request.queryString.contains('sort')}">
+                <div class="btn btn-primary action-item">
+                    <a href="?${pageContext.request.queryString.replace("title", "created")}">Sort by Created</a>
+                </div>
+                <div class="btn btn-primary action-item">
+                    <a href="?${pageContext.request.queryString.replace("created", "title")}">Sort by Title</a>
+                </div>
+            </c:if>
+        </c:when>
+        <c:otherwise>
+            <div class="btn btn-primary action-item">
+                <a href="?sort=created">Sort by Created</a>
+            </div>
+            <div class="btn btn-primary action-item">
+                <a href="?sort=title">Sort by Title</a>
+            </div>
+        </c:otherwise>
+    </c:choose>
+    <c:choose>
+        <c:when test="${pageContext.request.queryString.contains('sort')}">
+            <c:if test="${!pageContext.request.queryString.contains('mode')}">
+                <div class="btn btn-primary action-item">
+                    <a href="?${pageContext.request.queryString}&mode=summary">Summary</a>
+                </div>
+                <div class="btn btn-primary action-item">
+                    <a href="?${pageContext.request.queryString}&mode=full">Full Note</a>
+                </div>
+            </c:if>
+            <c:if test="${pageContext.request.queryString.contains('mode')}">
+                <div class="btn btn-primary action-item">
+                    <a href="?${pageContext.request.queryString.replace("full", "summary")}">Summary</a>
+                </div>
+                <div class="btn btn-primary action-item">
+                    <a href="?${pageContext.request.queryString.replace("summary","full")}">Full Note</a>
+                </div>
+            </c:if>
+        </c:when>
+        <c:otherwise>
+            <div class="btn btn-primary action-item">
+                <a href="?mode=summary">Summary</a>
+            </div>
+            <div class="btn btn-primary action-item">
+                <a href="?mode=full">Full Note</a>
+            </div>
+        </c:otherwise>
+    </c:choose>
+    <div class="btn btn-primary action-item">
+        <a href="${pageContext.request.requestURL.substring(0,pageContext.request.requestURL.length()-9)}">Back to
+            default</a>
+    </div>
+</div>
+<div class="index-actions">
+    <div class="btn btn-primary action-item"><a href="create">Create</a></div>
+    <div class="btn btn-primary action-item"><a href="search">Search</a></div>
+</div>
 
 </body>
 
