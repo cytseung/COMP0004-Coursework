@@ -66,3 +66,20 @@ body {
     color: white;
 }
 
+.create-edit-page form {
+    display: table;
+}
+
+.create-edit-page p {
+    display: table-row;
+}
+
+.create-edit-page label {
+    display: table-cell;
+}
+
+.create-edit-page input {
+    display: table-cell;
+    margin: 5px;
+}
+
